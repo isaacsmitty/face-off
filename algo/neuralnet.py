@@ -13,6 +13,7 @@ LEARNING_RATE = [decimal.Decimal('0.1')]
 TEAM_ID_1 = int(sys.argv[1])
 TEAM_ID_2 = int(sys.argv[2])
 SEASON = int(sys.argv[3])
+DATABASE_URL = os.environ['DATABASE_URL']
 CONNECTION = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 # Calculate mean absolute error
