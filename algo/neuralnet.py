@@ -14,8 +14,8 @@ TEAM_ID_1 = int(sys.argv[1])
 TEAM_ID_2 = int(sys.argv[2])
 SEASON = int(sys.argv[3])
 DATABASE_URL = os.environ['DATABASE_URL']
-CONNECTION = psycopg2.connect(DATABASE_URL, sslmode='require')
-CURSOR = connection.cursor()
+# CONNECTION = psycopg2.connect(DATABASE_URL, sslmode='require')
+# CURSOR = connection.cursor()
 
 # Calculate mean absolute error
 def mae_metric(actual, predicted):
@@ -32,23 +32,24 @@ def get_past_team_stats(id, season):
         #                           host = os.getenv("DB_HOST"),
         #                           port = os.getenv("DB_PORT"),
         #                           database = os.getenv("DATABASE_URL"))
-
+        connection = psycopg2.connect(DATABASE_URL, sslmode='require')
+        cursor = connection.cursor()
         # cursor = connection.cursor()
         # Print PostgreSQL Connection properties
         # print ( connection.get_dsn_parameters(),"\n")
 
         # Print PostgreSQL version
-        CURSOR.execute('SELECT "goalsPerGame", "goalsAgainstPerGame", "evGGARatio", "powerPlayPercentage", "penaltyKillPercentage", "shootingPctg", "savePctg", "winLeadSecondPer", "winOutshootOpp" FROM past_teams WHERE team_id = %s AND season = %s' %(id, season))
-        record = CURSOR.fetchone()
+        cursor.execute('SELECT "goalsPerGame", "goalsAgainstPerGame", "evGGARatio", "powerPlayPercentage", "penaltyKillPercentage", "shootingPctg", "savePctg", "winLeadSecondPer", "winOutshootOpp" FROM past_teams WHERE team_id = %s AND season = %s' %(id, season))
+        record = cursor.fetchone()
         # print("You are connected to - ", record,"\n")
         return record
     except (Exception, psycopg2.Error) as error :
         print ("Error while connecting to PostgreSQL", error)
     finally:
         #closing database connection.
-            if(CONNECTION):
-                CURSOR.close()
-                CONNECTION.close()
+            if(connection):
+                cursor.close()
+                connection.close()
                 # print("PostgreSQL connection is closed")
 
 def compare_two_teams(id_1, id_2, season):
