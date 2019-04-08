@@ -28,7 +28,7 @@ def get_past_team_stats(id, season):
                                   password = os.getenv("DB_PASS"),
                                   host = os.getenv("DB_HOST"),
                                   port = os.getenv("DB_PORT"),
-                                  database = process.env.DATABASE_URL OR os.getenv("DB_NAME"))
+                                  database = os.getenv("DATABASE_URL"))
 
         cursor = connection.cursor()
         # Print PostgreSQL Connection properties
