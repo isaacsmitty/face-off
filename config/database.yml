@@ -18,4 +18,4 @@ test:
 
 production:
   <<: *default
-  database: face_off
+  database: postgresql-spherical-94018
