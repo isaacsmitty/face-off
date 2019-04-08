@@ -13,6 +13,11 @@ LEARNING_RATE = [decimal.Decimal('0.1')]
 TEAM_ID_1 = int(sys.argv[1])
 TEAM_ID_2 = int(sys.argv[2])
 SEASON = int(sys.argv[3])
+CONNECTION = psycopg2.connect(user = os.getenv("DB_USER"),
+                                  password = os.getenv("DB_PASS"),
+                                  host = os.getenv("DB_HOST"),
+                                  port = os.getenv("DB_PORT"),
+                                  database = os.getenv("DATABASE_URL"))
 
 # Calculate mean absolute error
 def mae_metric(actual, predicted):
@@ -24,11 +29,11 @@ def mae_metric(actual, predicted):
 # Helper function to get past team stats based on team id and season
 def get_past_team_stats(id, season):
     try:
-        connection = psycopg2.connect(user = os.getenv("DB_USER"),
-                                  password = os.getenv("DB_PASS"),
-                                  host = os.getenv("DB_HOST"),
-                                  port = os.getenv("DB_PORT"),
-                                  database = os.getenv("DATABASE_URL"))
+        # connection = psycopg2.connect(user = os.getenv("DB_USER"),
+        #                           password = os.getenv("DB_PASS"),
+        #                           host = os.getenv("DB_HOST"),
+        #                           port = os.getenv("DB_PORT"),
+        #                           database = os.getenv("DATABASE_URL"))
 
         cursor = connection.cursor()
         # Print PostgreSQL Connection properties
