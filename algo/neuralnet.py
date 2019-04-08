@@ -15,6 +15,7 @@ TEAM_ID_2 = int(sys.argv[2])
 SEASON = int(sys.argv[3])
 DATABASE_URL = os.environ['DATABASE_URL']
 CONNECTION = psycopg2.connect(DATABASE_URL, sslmode='require')
+CURSOR = connection.cursor()
 
 # Calculate mean absolute error
 def mae_metric(actual, predicted):
@@ -32,13 +33,13 @@ def get_past_team_stats(id, season):
         #                           port = os.getenv("DB_PORT"),
         #                           database = os.getenv("DATABASE_URL"))
 
-        cursor = connection.cursor()
+        # cursor = connection.cursor()
         # Print PostgreSQL Connection properties
         # print ( connection.get_dsn_parameters(),"\n")
 
         # Print PostgreSQL version
-        cursor.execute('SELECT "goalsPerGame", "goalsAgainstPerGame", "evGGARatio", "powerPlayPercentage", "penaltyKillPercentage", "shootingPctg", "savePctg", "winLeadSecondPer", "winOutshootOpp" FROM past_teams WHERE team_id = %s AND season = %s' %(id, season))
-        record = cursor.fetchone()
+        CURSOR.execute('SELECT "goalsPerGame", "goalsAgainstPerGame", "evGGARatio", "powerPlayPercentage", "penaltyKillPercentage", "shootingPctg", "savePctg", "winLeadSecondPer", "winOutshootOpp" FROM past_teams WHERE team_id = %s AND season = %s' %(id, season))
+        record = CURSOR.fetchone()
         # print("You are connected to - ", record,"\n")
         return record
     except (Exception, psycopg2.Error) as error :
@@ -46,7 +47,7 @@ def get_past_team_stats(id, season):
     finally:
         #closing database connection.
             if(CONNECTION):
-                cursor.close()
+                CURSOR.close()
                 CONNECTION.close()
                 # print("PostgreSQL connection is closed")
 
