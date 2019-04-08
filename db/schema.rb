@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2019_04_04_164330) do
   end
 
   create_table "teams", force: :cascade do |t|
+    t.integer "season"
     t.string "name"
     t.integer "gamesPlayed"
     t.integer "wins"
