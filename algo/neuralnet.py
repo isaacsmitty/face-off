@@ -45,9 +45,9 @@ def get_past_team_stats(id, season):
         print ("Error while connecting to PostgreSQL", error)
     finally:
         #closing database connection.
-            if(connection):
+            if(CONNECTION):
                 cursor.close()
-                connection.close()
+                CONNECTION.close()
                 # print("PostgreSQL connection is closed")
 
 def compare_two_teams(id_1, id_2, season):
