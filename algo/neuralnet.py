@@ -13,11 +13,7 @@ LEARNING_RATE = [decimal.Decimal('0.1')]
 TEAM_ID_1 = int(sys.argv[1])
 TEAM_ID_2 = int(sys.argv[2])
 SEASON = int(sys.argv[3])
-CONNECTION = psycopg2.connect(user = os.getenv("DB_USER"),
-                                  password = os.getenv("DB_PASS"),
-                                  host = os.getenv("DB_HOST"),
-                                  port = os.getenv("DB_PORT"),
-                                  database = os.getenv("DATABASE_URL"))
+CONNECTION = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 # Calculate mean absolute error
 def mae_metric(actual, predicted):
