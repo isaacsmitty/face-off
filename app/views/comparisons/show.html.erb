@@ -11,7 +11,7 @@
         
     <% if params[:team_1] %> 
         <div class="entry-title">
-        <%= select_tag 'team_1', options_from_collection_for_select((Team.order(:name), :id, :name), :prompt => "Select Team", :onchange => "changeLogo1(this.value)" %>
+        <%= select_tag 'team_1', options_from_collection_for_select(Team.all, :id, :name), :prompt => "Select Team", :onchange => "changeLogo1(this.value)" %>
         
         
         <div class="logo"> 
@@ -39,7 +39,7 @@
         <% else %> 
 
         <div class="entry-title">
-        <%= select_tag 'team_1', options_from_collection_for_select(Team.order(:name), :id, :name), :prompt => "Select Team", :onchange => "changeLogo1(this.value)" %>
+        <%= select_tag 'team_1', options_from_collection_for_select(Team.all, :id, :name), :prompt => "Select Team", :onchange => "changeLogo1(this.value)" %>
         
         
         <div class="logo"> 
@@ -144,7 +144,8 @@
     <end>
 
     </div>
-    <% if params[:team_1] %>    
+    <% if params[:team_1] %> 
+
     <div class="d-flex">
         <div class="compare_chart">
             <%= column_chart [{name: "Wins", data: Team.where(id: [@team1.id,@team2.id]).group('name').sum('wins')}, {name: "Losses", data: Team.where(id: [@team1.id,@team2.id]).group('name').sum('losses')}], title: "Season Wins", colors: ["#aee08d", "#d1664b"] %>
@@ -159,6 +160,7 @@
             <%= bar_chart PastTeam.where(team_id: [@team1.id,@team2.id]).order('season').group('name').group('season').sum('pts'), title: "Points", colors: ["#aee08d", "#7aa7ef"], discrete: true%>      
         </div>  
     </div>
+    
     <% end %>
 </div>  
     
