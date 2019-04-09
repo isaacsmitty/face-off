@@ -1,7 +1,6 @@
 class CreateTeams < ActiveRecord::Migration[5.2]
   def change
     create_table :teams do |t|
-      t.integer "season"
       t.string "name"
       t.integer "gamesPlayed"
       t.integer "wins"
@@ -31,7 +30,6 @@ class CreateTeams < ActiveRecord::Migration[5.2]
       t.decimal "faceOffWinPercentage", :precision => 4
       t.decimal "shootingPctg", :precision => 4
       t.decimal "savePctg", :precision => 4
-
       t.timestamps
     end
   end
