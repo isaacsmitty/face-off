@@ -21,7 +21,7 @@ gem 'rest-client'
 gem 'indico'
 gem 'responders'
 
-gem 'react-rails'
+
 
 # DISPLAY
 gem 'bootstrap'
