@@ -81,7 +81,7 @@
         
     <% if params[:team_2] %> 
     <div class="entry-title">
-    <%= select_tag 'team_2', options_from_collection_for_select(Team.all, :id, :name), :prompt => "Select Team", :onchange => "changeLogo2(this.value)" %>
+    <%= select_tag 'team_2', options_from_collection_for_select(Team.order(:name), :id, :name), :prompt => "Select Team", :onchange => "changeLogo2(this.value)" %>
     
     
     <div class="logo"> 
@@ -109,7 +109,7 @@
     <% else %> 
 
     <div class="entry-title">
-    <%= select_tag 'team_2', options_from_collection_for_select(Team.all, :id, :name), :prompt => "Select Team", :onchange => "changeLogo2(this.value)" %>
+    <%= select_tag 'team_2', options_from_collection_for_select(Team.order(:name), :id, :name), :prompt => "Select Team", :onchange => "changeLogo2(this.value)" %>
     
     
     <div class="logo"> 
