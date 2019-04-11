@@ -16,11 +16,13 @@
               <%= select_tag 'team1_id', options_from_collection_for_select(Team.order(:name), :id, :name), { :prompt => "Select a Team", :onchange => "changeLogo1(this.value)" } %>
           </div>
 
-          <div class="team-selection">
-            <%= button_tag 'FACE OFF', :class => "btn btn-primary" %>
-          </div>
+          
 
-          <div class="loader"></div>
+          <div class="team-selection" >
+            <div class="spinner"></div>
+            <%= button_tag 'FACE OFF', :class => "btn btn-primary", :id => "face_off" %>
+          </div>
+         
 
           <div class="team-selection">
             <div class="logo-container">
@@ -33,6 +35,14 @@
       <% end %>
     </div>
   </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script>
+    $("#face_off").click(function(){
+      $(".spinner").show();
+      $("#face_off").hide();
+    });
+  </script>
 </header>
 
 <div class="games-container">
